@@ -1,0 +1,21 @@
+{
+    "desiredResidence":{"postCode": "56821",
+                    "city": "Ellenz-Poltersdorf",
+                    "street": "Moselweinstraße",
+                    "houseNumber":"117",
+                    "includedDistricts":["Ellenz","Poltersdorf"]},
+    "desiredProperty":{
+                    "maxPrice":5000,
+                    "minLivingSpace":70,
+                    "minNumberOfRooms":2,
+                    "earliestDateAvailable":"current"
+    },
+    "personalInformation":{
+        "firstName":"Johny",
+        "lastName":"Blank",
+        "email":"yjinadu+johnyblank@immomio.de",
+        "password":"sample123"
+}
+
+
+}
