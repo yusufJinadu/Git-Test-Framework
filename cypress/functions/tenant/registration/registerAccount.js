@@ -1,92 +1,67 @@
 /// <reference types="cypress" />
 import RegisterAccountPage from '../../../support/page-objects/registration/registerAccountPage'
 const pageName = 'register account page'
+const registerAccountPage = new RegisterAccountPage()
+const page = new RegisterAccountPage()
 export function registerAccount() {
-    const registerAccountPage = new RegisterAccountPage()
+    
     it(pageName + 'page should contain a step 3 paragraph with a text of Schritt 3', function () {
-        registerAccountPage.getStepParagraph().should('exist')
-        registerAccountPage.getStepParagraph().invoke('text').should('include', 'Schritt 3')
+      cy.checkElementExistenceAndText(page.getStepParagraph,'Schritt 3')
       })
 
       it(pageName + ' should contain a Registration header with a text of Anmeldung', function () {
-        registerAccountPage.getStepPurpose().should('exist')
-        registerAccountPage.getStepPurpose().invoke('text').should('include', 'Anmeldung')
+        cy.checkElementExistenceAndText(page.getStepPurpose,'Anmeldung')
       })
 
       it(pageName + ' should contain a firstname input with a vorname label witha a required sign , a name eingeben placeholder no errors and be required  ', function () {
-        registerAccountPage.getFirstNameError().should('not.exist')
-        registerAccountPage.getFirstNameInput().should('exist')
-        registerAccountPage.getFirstNameInput().invoke('attr','placeholder').should('include', 'Name eingeben')
-        registerAccountPage.getFirstNameInput().invoke('attr','ng-reflect-required').should('exist')
+        cy.noInitialInputError(page.getFirstNameError)
+        cy.checkInputLabelAndPlaceholder(page.getFirstNameInput,page.getFirstNameLabel,"Name eingeben","Vorname")
+        cy.checkRequiredInput(page.getFirstNameInput,page.getFirstNameLabel,'ng-reflect-required',"*")
       })
 
+  
       it(pageName + ' should contain a lasttname input with a vorname label witha a required sign , a name eingeben placeholder no errors and be required  ', function () {
-        registerAccountPage.getLastNameError().should('not.exist')
-        registerAccountPage.getLastNameInput().should('exist')
-        registerAccountPage.getLastNameInput().invoke('attr','placeholder').should('include', 'Name eingeben')
-        registerAccountPage.getLastNameInput().invoke('attr','ng-reflect-required').should('exist')
+        cy.noInitialInputError(page.getLastNameError)
+        cy.checkInputLabelAndPlaceholder(page.getLastNameInput,page.getLastNameLabel,"Name eingeben","Nachname")
+        cy.checkRequiredInput(page.getLastNameInput,page.getLastNameLabel,'ng-reflect-required',"*")
       })
+      
      
       it(pageName + ' should contain a email input with an email label with a required sign , a email@beispiel.de placeholder no errors and be required  ', function () {
-        registerAccountPage.getEmailError().should('not.exist')
-        registerAccountPage.getEmailInput().should('exist')
-        registerAccountPage.getEmailInput().invoke('attr','placeholder').should('include', 'email@beispiel.de')
-        registerAccountPage.getEmailInput().invoke('attr','ng-reflect-required').should('exist')
+        cy.noInitialInputError(page.getEmailError)
+        cy.checkInputLabelAndPlaceholder(page.getEmailInput,page.getEmailLabel,"email@beispiel.de","E-Mail Adresse")
+        cy.checkRequiredInput(page.getEmailInput,page.getEmailLabel,'ng-reflect-required',"*")
       })
 
+
       it(pageName + ' should contain a Password input with a passwort label with a required sign , a passwort placeholder no errors and be required  ', function () {
-        registerAccountPage.getPasswordError().should('not.exist')
-        registerAccountPage.getPasswordInput().should('exist')
-        registerAccountPage.getPasswordInput().invoke('attr','placeholder').should('include', 'Passwort')
-        registerAccountPage.getPasswordInput().invoke('attr','ng-reflect-required').should('exist')
+        cy.noInitialInputError(page.getPasswordError)
+        cy.checkInputLabelAndPlaceholder(page.getPasswordInput,page.getPasswordLabel,"Passwort","Passwort")
+        cy.checkRequiredInput(page.getPasswordInput,page.getPasswordLabel,'ng-reflect-required',"*")
       })
 
       
-      it(pageName + ' firstname input ahould yield appropriate errors depending on input ', function () {
-        registerAccountPage.getFirstNameInput().click()
-        registerAccountPage.getBody().click()
-        registerAccountPage.getFirstNameError().should('exist')
-        registerAccountPage.getFirstNameError().invoke('text').should('include','Pflichtfeld!')
-        registerAccountPage.getFirstNameInput().click().type('y')
-        registerAccountPage.getFirstNameError().should('not.exist')
-        registerAccountPage.getFirstNameInput().clear()
-        
+      it(pageName + ' firstname input should yield appropriate errors depending on input ', function () {
+        cy.genericRequiredInputErrorCheck(page.getFirstNameInput,page.getBody,page.getFirstNameError)  
       })
 
-      it(pageName + ' last name input ahould yield appropriate errors depending on input ', function () {
-        registerAccountPage.getLastNameInput().click()
-        registerAccountPage.getBody().click()
-        registerAccountPage.getLastNameError().should('exist')
-        registerAccountPage.getLastNameError().invoke('text').should('include','Pflichtfeld!')
-        registerAccountPage.getLastNameInput().click().type('y')
-        registerAccountPage.getLastNameError().should('not.exist')
-        registerAccountPage.getLastNameInput().clear()
+      it(pageName + ' last name input should yield appropriate errors depending on input ', function () {
+        cy.genericRequiredInputErrorCheck(page.getLastNameInput,page.getBody,page.getLastNameError)  
       })
 
       it(pageName + ' email input ahould yield appropriate errors depending on input ', function () {
-        registerAccountPage.getEmailInput().click()
-        registerAccountPage.getBody().click()
-        registerAccountPage.getEmailError().should('exist')
-        registerAccountPage.getEmailError().invoke('text').should('include','Pflichtfeld!')
-        registerAccountPage.getEmailInput().click().type('y')
-        registerAccountPage.getBody().click()
-        registerAccountPage.getEmailError().should('exist')
-        registerAccountPage.getEmailError().invoke('text').should('include','Das Format entspricht keiner E-Mail-Adresse')
-        registerAccountPage.getEmailInput().click().type('y@')
-        registerAccountPage.getBody().click()
-        registerAccountPage.getEmailError().should('exist')
-        registerAccountPage.getEmailError().invoke('text').should('include','Das Format entspricht keiner E-Mail-Adresse')
-        registerAccountPage.getEmailInput().click().clear().type('y@j')
-        registerAccountPage.getBody().click()
-        registerAccountPage.getEmailError().should('not.exist')
-        registerAccountPage.getEmailInput().clear()
+        cy.emailInputErrorCheck(page.getEmailInput,page.getBody,page.getEmailError)
+  
       })
 
-      it(pageName + ' password input ahould yield appropriate errors depending on input ', function () {
+      it(pageName + ' password input should yield appropriate errors depending on input ', function () {
         registerAccountPage.getPasswordInput().click()
         registerAccountPage.getBody().click()
+        cy.pause()
         registerAccountPage.getPasswordError().should('exist')
+        cy.pause()
         registerAccountPage.getPasswordError().invoke('text').should('include','Pflichtfeld!')
+        cy.pause()
         registerAccountPage.getPasswordInput().click().clear().type('1')
         registerAccountPage.getPasswordError().invoke('text').should('include','Wert zu kurz')
         registerAccountPage.getPasswordInput().click().clear().type('1234')

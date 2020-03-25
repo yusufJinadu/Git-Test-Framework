@@ -11,7 +11,7 @@ getStepPurpose(){
     return cy.get('.register__content h2.content__title')
 }
 
-getStepPurposeWarning(){
+getAdressUse(){
     return cy.get('.register__content p.uppercase-m.semibold:nth-child(3)')
 }
 
@@ -76,6 +76,11 @@ getCityOrPostCodeWarning()
     return cy.get('.input-messages .app-form-field-error')
 }
 
+getCityOrPostCodeError()
+{
+    return cy.get('.app-form-field-error')
+}
+
 getCitySuggestionDropdown()
 {
     return cy.get('.autocomplete__item')
@@ -105,6 +110,11 @@ getNumberInput()
     return cy.get('input[ng-reflect-name="houseNumber"]')
 }
 
+getNumberLabel()
+{
+    return cy.get(':nth-child(4) > .inline > .app-form-field-wrapper > .app-input-label-wrapper > .ng-star-inserted > .app-label')
+}
+
 getRequiredInputs()
 {
     return cy.get('input[ng-reflect-required = "true"]')
@@ -118,6 +128,11 @@ getUseCurrentLocationButton()
 getRadiusSlider()
 {
     return cy.get('div.slider__input-container input.slider__input')
+}
+
+getRadiusSliderLabel()
+{
+    return cy.get('.d-flex > app-form-field-label > .app-label')
 }
 
 getRadiusSliderValue()

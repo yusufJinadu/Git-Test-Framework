@@ -16,6 +16,11 @@ getFirstNameInput()
     return cy.get('input[ng-reflect-name="firstName"]')
 }
 
+getFirstNameLabel()
+{
+    return cy.get(':nth-child(1) > :nth-child(1) > .app-form-field > .app-form-field-wrapper > .app-input-label-wrapper > app-form-field-label.ng-star-inserted > .app-label')
+}
+
 getFirstNameError()
 {
     return cy.get(':nth-child(1) > .app-form-field > .app-form-field-wrapper > .input-messages > .app-form-field-errors > .ng-star-inserted > .app-form-field-error-wrapper > .app-form-field-error')
@@ -24,6 +29,11 @@ getFirstNameError()
 getLastNameInput()
 {
     return cy.get('input[ng-reflect-name="lastName"]')
+}
+
+getLastNameLabel()
+{
+    return cy.get(':nth-child(1) > :nth-child(2) > .app-form-field > .app-form-field-wrapper > .app-input-label-wrapper > app-form-field-label.ng-star-inserted > .app-label')
 }
 
 getLastNameError()
@@ -36,6 +46,11 @@ getEmailInput()
     return cy.get('input[ng-reflect-name="email"]')
 }
 
+getEmailLabel()
+{
+    return cy.get(':nth-child(2) > :nth-child(1) > .app-form-field > .app-form-field-wrapper > .app-input-label-wrapper > app-form-field-label.ng-star-inserted > .app-label')
+}
+
 getEmailError()
 {
     return cy.get(':nth-child(2) > :nth-child(1) > .app-form-field > .app-form-field-wrapper > .input-messages > .app-form-field-errors > .ng-star-inserted > .app-form-field-error-wrapper > .app-form-field-error')
@@ -44,6 +59,11 @@ getEmailError()
 getPasswordInput()
 {
     return cy.get('input[ng-reflect-name="password"]')
+}
+
+getPasswordLabel()
+{
+    return cy.get(':nth-child(2) > :nth-child(2) > .app-form-field > .app-form-field-wrapper > .app-input-label-wrapper > app-form-field-label.ng-star-inserted > .app-label')
 }
 
 getPasswordError()
