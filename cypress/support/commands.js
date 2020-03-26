@@ -183,12 +183,12 @@ Cypress.Commands.add("checkAcceptOnlyPositiveNumbers",(($input,attr) => {
 }))
 Cypress.Commands.add("emailInputErrorCheck",(($input,$body,$error) => {
     /**
-     * Checks if a postCode input yields the correct error based on use input
-     * $input = function to get input eg page.getInput
+     * Checks if a email input yields the correct error based on use input
+     * $input = function to get email input eg page.getEmailInput
      * $body = function to get body
      * $error = function to get error field
      */
-    $input().click({ force: true })
+    $input().click({ force: true }).clear({ force: true })
     $body().click({ force: true })
     $error().should('exist')
     $error().invoke('text').should('include','Pflichtfeld!')
@@ -204,5 +204,24 @@ Cypress.Commands.add("emailInputErrorCheck",(($input,$body,$error) => {
     $body().click({ force: true })
     $error().should('not.exist')
 }))
-
+Cypress.Commands.add("passwordInputErrorCheck",(($input,$body,$error) => {
+    /**
+     * Checks if a poassword input yields the correct error based on use input
+     * $input = function to get password input eg page.getPasswordInput
+     * $body = function to get body
+     * $error = function to get error field
+     */
+    $input().click({ force: true }).clear({ force: true })
+    $body().click({ force: true })
+    $error().should('exist')
+    $error().invoke('text').should('include','Pflichtfeld!')
+    $input().click({ force: true }).clear().type('1')
+    $error().invoke('text').should('include','Wert zu kurz')
+    $input().click().clear({ force: true }).type('1234')
+    $error().invoke('text').should('include','Wert zu kurz')
+    $input().click().clear({ force: true }).type('123456')
+    $error().invoke('text').should('include','Wert zu kurz')
+    $input().click().clear({ force: true }).type('1234567')
+    $error().should('not.exist')
+}))
 

@@ -66,7 +66,7 @@ export function selectPreferedProperty() {
             propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
             propertyPreferencePage.getCalenderButton().click()
             propertyPreferencePage.getCalender().should('exist')
-            propertyPreferencePage.getCalenderCurrentDate().first().click()
+            propertyPreferencePage.getCalenderCurrentDate().first().click({force:true})
             const todaysDate = Cypress.moment().format('DD.MM.YYYY')
             propertyPreferencePage.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
             propertyPreferencePage.getNextButton().click()

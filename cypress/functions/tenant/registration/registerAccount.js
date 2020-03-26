@@ -55,20 +55,7 @@ export function registerAccount() {
       })
 
       it(pageName + ' password input should yield appropriate errors depending on input ', function () {
-        registerAccountPage.getPasswordInput().click()
-        registerAccountPage.getBody().click()
-        cy.pause()
-        registerAccountPage.getPasswordError().should('exist')
-        cy.pause()
-        registerAccountPage.getPasswordError().invoke('text').should('include','Pflichtfeld!')
-        cy.pause()
-        registerAccountPage.getPasswordInput().click().clear().type('1')
-        registerAccountPage.getPasswordError().invoke('text').should('include','Wert zu kurz')
-        registerAccountPage.getPasswordInput().click().clear().type('1234')
-        registerAccountPage.getPasswordError().invoke('text').should('include','Wert zu kurz')
-        registerAccountPage.getPasswordInput().click().clear().type('1234567')
-        registerAccountPage.getPasswordError().should('not.exist')
-        registerAccountPage.getPasswordInput().clear()
+        cy.passwordInputErrorCheck(page.getPasswordInput,page.getBody,page.getPasswordError)
       })
 
       it(pageName + ' Accept Conditions checkbox should be unchecked ', function () {
@@ -99,8 +86,4 @@ export function registerAccount() {
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
           })
       })
-
-     
-      
-   
   }

@@ -13,10 +13,8 @@ import {registerViaGoogle} from '../../../../functions/tenant/registration/regis
 
   describe('Enter where would you like to live via neighborhood ,enter prefered property, enter personal details and complete signup', function() {
     selectDesiredAreaByNeighborhood()
-    /*
     selectPreferedProperty()
     registerAccount()
-    */
   })
   
 
