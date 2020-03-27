@@ -3,7 +3,7 @@ import PropertyPreferencePage from '../../../support/page-objects/registration/p
 const pageName = 'property preference page '
 const propertyPreferencePage = new PropertyPreferencePage()
 const page = new PropertyPreferencePage()
-export function selectPreferedProperty() {
+export function selectPreferedProperty_ui_func() {
     
     
       it(pageName + ' should contain a step 1 paragraph with a text of Schritt 2', function () {
@@ -76,3 +76,27 @@ export function selectPreferedProperty() {
       
    
   }
+
+  export function selectPreferedProperty_func() {
+    it(pageName + 'User should be able to select their propert preference and move to Register Account ', function () {
+      cy.fixture('registrationData').then(function (data) {
+          return data.desiredProperty
+        }).then(function (desiredProperty) {
+          propertyPreferencePage.getRentalPriceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+          propertyPreferencePage.getLivingSpaceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+          propertyPreferencePage.getMinNumberOfRoomsTabs().contains(desiredProperty.minNumberOfRooms).click()
+          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
+          propertyPreferencePage.getCalenderButton().click()
+          propertyPreferencePage.getCalender().should('exist')
+          propertyPreferencePage.getCalenderCurrentDate().first().click({force:true})
+          const todaysDate = Cypress.moment().format('DD.MM.YYYY')
+          propertyPreferencePage.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
+          propertyPreferencePage.getNextButton().click()
+          cy.url().should('include', '/registerAccount')
+        })
+    })
+    
+ 
+}

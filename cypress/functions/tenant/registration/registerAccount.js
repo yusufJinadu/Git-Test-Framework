@@ -3,7 +3,7 @@ import RegisterAccountPage from '../../../support/page-objects/registration/regi
 const pageName = 'register account page'
 const registerAccountPage = new RegisterAccountPage()
 const page = new RegisterAccountPage()
-export function registerAccount() {
+export function registerAccount_ui_func() {
     
     it(pageName + 'page should contain a step 3 paragraph with a text of Schritt 3', function () {
       cy.checkElementExistenceAndText(page.getStepParagraph,'Schritt 3')
@@ -84,6 +84,31 @@ export function registerAccount() {
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
               registerAccountPage.getPolicyCheckBox().click()
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
+              page.getFinishButton().contains('Fertig').trigger('mouseover').click({force:true})
+              cy.wait(2000)
+              cy.url().should('include','householdDetails')
+          })
+      })
+  }
+
+  export function registerAccount_func() {
+      it(pageName + ' user should be able to fill form and complete signup ', function () {
+        cy.fixture('registrationData').then(function (data) {
+            return data.personalInformation
+          }).then(function (personalInformation) {
+              registerAccountPage.getFirstNameInput().click().clear().type(personalInformation.firstName)
+              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              registerAccountPage.getLastNameInput().click().clear().type(personalInformation.lastName)
+              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              registerAccountPage.getEmailInput().click().clear().type(personalInformation.email)
+              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              registerAccountPage.getPasswordInput().click().clear().type(personalInformation.password)
+              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              registerAccountPage.getPolicyCheckBox().click()
+              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
+              page.getFinishButton().contains('Fertig').trigger('mouseover').click({force:true})
+              cy.wait(1000)
+              cy.url().should('include','householdDetails').click({force:true})
           })
       })
   }

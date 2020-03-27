@@ -2,14 +2,7 @@
 import PropertyLocationPage from '../../../support/page-objects/registration/propertyLocationPage'
 const pageName = 'propertyLocationPagePage'
 const page = new PropertyLocationPage()
-export function selectDesiredAreaByAddress() {
-  before(function () {
-    cy.window().then((win) => {
-      win.sessionStorage.clear()
-    })
-    cy.visit(Cypress.env('tn_url')+'/de/auth/register/propertyLocation')
-  })
-
+export function selectDesiredAreaByAddress_ui_func() {
   it(pageName + ' should contain a step 1 paragraph with a text of Schritt 1', function () {
     cy.checkElementExistenceAndText(page.getStepParagraph,'Schritt 1')
   })
@@ -107,15 +100,42 @@ export function selectDesiredAreaByAddress() {
       page.getNumberInput().click({force:true}).clear({ force: true }).type(desiredResidence.houseNumber)
       page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
       //page.getNextButton().click({force:true}) does not work
-      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true})
-      cy.url().should('include', '/propertyPreferences')
+      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true}).then(() => {
+        cy.url().should('include', '/propertyPreferences')
+      })
+    })
+  })
+}
 
+export function selectDesiredAreaByAddress_func() {
+  it(pageName + 'Renter should be able to enter apartment serach parameters using the adress and be redirected to the property preference ', function () {
+    cy.fixture('registrationData').then(function (data) {
+      return data.desiredResidence
+    }).then(function (desiredResidence) {
+      page.getPostCodeInput().clear({ force: true })
+      page.getStreetInput().clear({ force: true })
+      page.getNumberInput().clear({ force: true })
+      page.getCityInput().clear({ force: true })
+      page.getPostCodeInput().clear({ force: true }).type(desiredResidence.postCode)
+      page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+      page.getCityInput().clear({ force: true }).click({ force: true })
+      cy.wait(300)
+      page.getCityInput().should('have.value', desiredResidence.city)
+      page.getStreetInput().invoke('val').should('not.be.empty')
+      page.getNumberInput().invoke('val').should('not.be.empty')
+      page.getStreetInput().click({force:true}).clear({ force: true }).type(desiredResidence.street, { force: true })
+      page.getNumberInput().click({force:true}).clear({ force: true }).type(desiredResidence.houseNumber)
+      page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
+      //page.getNextButton().click({force:true}) does not work
+      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true}).then(() => {
+        cy.url().should('include', '/propertyPreferences')
+      })
     })
   })
 }
 
 
-export function selectDesiredAreaByNeighborhood() {
+export function selectDesiredAreaByNeighborhood_ui_func() {
   before(function () {
     cy.window().then((win) => {
       win.sessionStorage.clear()
@@ -170,8 +190,44 @@ export function selectDesiredAreaByNeighborhood() {
         page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
       })
       //propertyLocationPage.getNextButton().click({force:true})
-      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true})
-      cy.url().should('include', '/propertyPreferences')
+      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true}).then(() => {
+        cy.url().should('include', '/propertyPreferences')
+      })
+      
+    })
+    
+  })
+}
+
+export function selectDesiredAreaByNeighborhood_func() {
+  before(function () {
+    cy.window().then((win) => {
+      win.sessionStorage.clear()
+    })
+    cy.visit(Cypress.env('tn_url')+'/de/auth/register/propertyLocation')
+  })
+
+  it(pageName + ' City suggestion should dropdown based on enterd post code and a click should fill the input with appropriate value and be redirected to the property preference  ', function () {
+    cy.fixture('registrationData').then(function (data) {
+      return data.desiredResidence
+    }).then(function(desiredResidence){
+      page.getSelectByDistrictRadio().click({ force: true })
+      page.getCityOrPostCodeInput().clear().click().type(desiredResidence.postCode)
+      page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+      page.getCitySuggestionDropdown().invoke('attr','aria-expanded').should('eq','true')
+      page.getCitySuggestionDropdown().invoke('text').should('include',desiredResidence.city)
+      page.getCitySuggestionDropdownText().click()
+      page.getCityOrPostCodeInput().invoke('val').should('include',desiredResidence.city)
+      desiredResidence.includedDistricts.forEach((district) => {
+        page.getIncludedDistricts().contains(district).should('exist')
+        page.getIncludedDistricts().contains(district).click()
+        page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
+      })
+      //propertyLocationPage.getNextButton().click({force:true})
+      page.getNextButton().contains('Weiter').trigger('mouseover').click({force:true}).then(() => {
+        cy.url().should('include', '/propertyPreferences')
+      })
+      
     })
     
   })
