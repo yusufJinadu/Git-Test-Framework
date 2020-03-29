@@ -33,5 +33,6 @@ export function generateRandomEmail(){
     let char1 = Math.floor(Math.random() * 10000)
     let char2 = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)]
     let fullChar = char1 + char2
+    console.log('gotten',`yjinadu+johnyblank${fullChar}@immomio.de`)
     return `yjinadu+johnyblank${fullChar}@immomio.de`
 }

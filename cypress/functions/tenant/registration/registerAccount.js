@@ -71,9 +71,9 @@ export function registerAccount_ui_func() {
       })*/
 
       it(pageName + ' user should be able to fill form and complete signup ', function () {
-        cy.fixture('registrationData').then(function (data) {
-            return data.personalInformation
-          }).then(function (personalInformation) {
+        cy.readFile("cypress/fixtures/registrationData.json").then((data) => {
+          return data.personalInformation
+      }).then(function (personalInformation) {
               registerAccountPage.getFirstNameInput().click().clear().type(personalInformation.firstName)
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
               registerAccountPage.getLastNameInput().click().clear().type(personalInformation.lastName)
@@ -93,9 +93,9 @@ export function registerAccount_ui_func() {
 
   export function registerAccount_func() {
       it(pageName + ' user should be able to fill form and complete signup ', function () {
-        cy.fixture('registrationData').then(function (data) {
-            return data.personalInformation
-          }).then(function (personalInformation) {
+        cy.readFile("cypress/fixtures/registrationData.json").then((data) => {
+          return data.personalInformation
+      }).then(function (personalInformation) {
               registerAccountPage.getFirstNameInput().click().clear().type(personalInformation.firstName)
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
               registerAccountPage.getLastNameInput().click().clear().type(personalInformation.lastName)
@@ -108,7 +108,9 @@ export function registerAccount_ui_func() {
               registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
               page.getFinishButton().contains('Fertig').trigger('mouseover').click({force:true})
               cy.wait(1000)
-              cy.url().should('include','householdDetails').click({force:true})
+              cy.url().should('include','householdDetails')
           })
       })
   }
+
+  

@@ -4,8 +4,8 @@ import {selectPreferedProperty_func} from '../../../../functions/tenant/registra
 import {registerAccount_func} from '../../../../functions/tenant/registration/registerAccount'
 import {generateRandomEmail} from '../../../../functions/general'
 
-const data = (() => { 
-return {
+const data = () => {
+    return  {
     "desiredResidence": {
         "postCode": "56821",
         "city": "Ellenz-Poltersdorf",
@@ -29,7 +29,8 @@ return {
         "password": "sample123"
     }
 }
-})
+}
+
 
 
 
@@ -40,7 +41,6 @@ return {
         })
         cy.visit(Cypress.env('tn_url')+'/de/auth/register/propertyLocation')
       })
-      console.log('data',data)
     it('write registration data', function(){
         cy.writeFile("cypress/fixtures/registrationData.json", data() )
     })
