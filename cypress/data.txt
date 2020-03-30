@@ -1,0 +1,8 @@
+eBay Kleinanzeigen
+inserate@immomio.de /Sample123
+inserate.int@immomio.de
+inserate.stg@immomio.de sample123
+FTP-Server: ftp.ebay-kleinanzeigen.de
+FTP-Username: immomio
+FTP-Passwort: koyzibcqezqo
+Anbieter-ID/ Nr.: immomiogit
