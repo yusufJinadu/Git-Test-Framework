@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 import RegisterAccountPage from '../../../support/page-objects/registration/registerAccountPage'
 const pageName = 'register account page'
-const registerAccountPage = new RegisterAccountPage()
 const page = new RegisterAccountPage()
 export function registerAccount_ui_func() {
     
@@ -59,7 +58,7 @@ export function registerAccount_ui_func() {
       })
 
       it(pageName + ' Accept Conditions checkbox should be unchecked ', function () {
-        registerAccountPage.getPolicyCheckBox().should('be','unchecked')
+        page.getPolicyCheckBox().should('be','unchecked')
       })
       /*
       it(pageName + ' Clicking on terms of use should redirect to the AGB page ', function () {
@@ -74,16 +73,16 @@ export function registerAccount_ui_func() {
         cy.readFile("cypress/fixtures/registrationData.json").then((data) => {
           return data.personalInformation
       }).then(function (personalInformation) {
-              registerAccountPage.getFirstNameInput().click().clear().type(personalInformation.firstName)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getLastNameInput().click().clear().type(personalInformation.lastName)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getEmailInput().click().clear().type(personalInformation.email)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getPasswordInput().click().clear().type(personalInformation.password)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getPolicyCheckBox().click()
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
+              page.getFirstNameInput().click().clear().type(personalInformation.firstName)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getLastNameInput().click().clear().type(personalInformation.lastName)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getEmailInput().click().clear().type(personalInformation.email)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getPasswordInput().click().clear().type(personalInformation.password)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getPolicyCheckBox().click()
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
               page.getFinishButton().contains('Fertig').trigger('mouseover').click({force:true})
               cy.wait(2000)
               cy.url().should('include','householdDetails')
@@ -96,16 +95,16 @@ export function registerAccount_ui_func() {
         cy.readFile("cypress/fixtures/registrationData.json").then((data) => {
           return data.personalInformation
       }).then(function (personalInformation) {
-              registerAccountPage.getFirstNameInput().click().clear().type(personalInformation.firstName)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getLastNameInput().click().clear().type(personalInformation.lastName)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getEmailInput().click().clear().type(personalInformation.email)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getPasswordInput().click().clear().type(personalInformation.password)
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
-              registerAccountPage.getPolicyCheckBox().click()
-              registerAccountPage.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
+              page.getFirstNameInput().click().clear().type(personalInformation.firstName)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getLastNameInput().click().clear().type(personalInformation.lastName)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getEmailInput().click().clear().type(personalInformation.email)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getPasswordInput().click().clear().type(personalInformation.password)
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',true)
+              page.getPolicyCheckBox().click()
+              page.getFinishButton().invoke('attr','ng-reflect-disabled').should('include',false)
               page.getFinishButton().contains('Fertig').trigger('mouseover').click({force:true})
               cy.wait(1000)
               cy.url().should('include','householdDetails')

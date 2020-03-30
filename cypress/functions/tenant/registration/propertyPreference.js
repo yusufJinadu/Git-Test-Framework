@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 import PropertyPreferencePage from '../../../support/page-objects/registration/propertyPreferencePage'
 const pageName = 'property preference page '
-const propertyPreferencePage = new PropertyPreferencePage()
 const page = new PropertyPreferencePage()
 export function selectPreferedProperty_ui_func() {
     
@@ -43,10 +42,10 @@ export function selectPreferedProperty_ui_func() {
 
    
       it(pageName + ' should contain a panel with tabs for choosing minimum number of rooms ', function () {
-        propertyPreferencePage.getMinNumberOfRoomsTabs().contains('1').should('exist')
-        propertyPreferencePage.getMinNumberOfRoomsTabs().contains('2').should('exist')
-        propertyPreferencePage.getMinNumberOfRoomsTabs().contains('3').should('exist')
-        propertyPreferencePage.getMinNumberOfRoomsTabs().contains('4+').should('exist')
+        page.getMinNumberOfRoomsTabs().contains('1').should('exist')
+        page.getMinNumberOfRoomsTabs().contains('2').should('exist')
+        page.getMinNumberOfRoomsTabs().contains('3').should('exist')
+        page.getMinNumberOfRoomsTabs().contains('4+').should('exist')
       })
 
       it(pageName + ' should contain an Earliest available date input with appropriate label and dd.mm.yyyy placeholder', function () {
@@ -58,18 +57,18 @@ export function selectPreferedProperty_ui_func() {
         cy.fixture('registrationData').then(function (data) {
             return data.desiredProperty
           }).then(function (desiredProperty) {
-            propertyPreferencePage.getRentalPriceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
-            propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
-            propertyPreferencePage.getLivingSpaceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
-            propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
-            propertyPreferencePage.getMinNumberOfRoomsTabs().contains(desiredProperty.minNumberOfRooms).click()
-            propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
-            propertyPreferencePage.getCalenderButton().click()
-            propertyPreferencePage.getCalender().should('exist')
-            propertyPreferencePage.getCalenderCurrentDate().first().click({force:true})
+            page.getRentalPriceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+            page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+            page.getLivingSpaceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+            page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+            page.getMinNumberOfRoomsTabs().contains(desiredProperty.minNumberOfRooms).click()
+            page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
+            page.getCalenderButton().click()
+            page.getCalender().should('exist')
+            page.getCalenderCurrentDate().first().click({force:true})
             const todaysDate = Cypress.moment().format('DD.MM.YYYY')
-            propertyPreferencePage.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
-            propertyPreferencePage.getNextButton().click()
+            page.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
+            page.getNextButton().click()
             cy.url().should('include', '/registerAccount')
           })
       })
@@ -82,18 +81,18 @@ export function selectPreferedProperty_ui_func() {
       cy.fixture('registrationData').then(function (data) {
           return data.desiredProperty
         }).then(function (desiredProperty) {
-          propertyPreferencePage.getRentalPriceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
-          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
-          propertyPreferencePage.getLivingSpaceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
-          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
-          propertyPreferencePage.getMinNumberOfRoomsTabs().contains(desiredProperty.minNumberOfRooms).click()
-          propertyPreferencePage.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
-          propertyPreferencePage.getCalenderButton().click()
-          propertyPreferencePage.getCalender().should('exist')
-          propertyPreferencePage.getCalenderCurrentDate().first().click({force:true})
+          page.getRentalPriceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+          page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+          page.getLivingSpaceInput().click({force:true}).clear().type(desiredProperty.maxPrice)
+          page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',true)
+          page.getMinNumberOfRoomsTabs().contains(desiredProperty.minNumberOfRooms).click()
+          page.getNextButton().invoke('attr','ng-reflect-disabled').should('include',false)
+          page.getCalenderButton().click()
+          page.getCalender().should('exist')
+          page.getCalenderCurrentDate().first().click({force:true})
           const todaysDate = Cypress.moment().format('DD.MM.YYYY')
-          propertyPreferencePage.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
-          propertyPreferencePage.getNextButton().click()
+          page.getEarliestAvailableInput().invoke('val').should('include',todaysDate)
+          page.getNextButton().click()
           cy.url().should('include', '/registerAccount')
         })
     })
