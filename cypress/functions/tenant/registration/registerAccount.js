@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import RegisterAccountPage from '../../../support/page-objects/registration/registerAccountPage'
+import RegisterAccountPage from '../../../support/page-objects/tenant/registration/registerAccountPage'
 const pageName = 'register account page'
 const page = new RegisterAccountPage()
 export function registerAccount_ui_func() {

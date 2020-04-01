@@ -1,5 +1,7 @@
 {
+    "chromeWebSecurity": false,
     "env":{
-        "tn_url":"http://www.stg.immomio.com"
+        "tn_url":"http://www.stg.immomio.com",
+        "ll_url":"http://app.stg.immomio.com"
     }
 }

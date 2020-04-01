@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import PropertyPreferencePage from '../../../support/page-objects/registration/propertyPreferencePage'
+import PropertyPreferencePage from '../../../support/page-objects/tenant/registration/propertyPreferencePage'
 const pageName = 'property preference page '
 const page = new PropertyPreferencePage()
 export function selectPreferedProperty_ui_func() {

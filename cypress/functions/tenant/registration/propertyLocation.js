@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import PropertyLocationPage from '../../../support/page-objects/registration/propertyLocationPage'
+import PropertyLocationPage from '../../../support/page-objects/tenant/registration/propertyLocationPage'
 const pageName = 'propertyLocationPagePage'
 const page = new PropertyLocationPage()
 export function selectDesiredAreaByAddress_ui_func() {
