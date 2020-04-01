@@ -1,20 +1,18 @@
 /// <reference types="cypress" />
-import {selectDesiredAreaByAddress_func, selectDesiredAreaByNeighborhood_func} from '../../../../functions/tenant/registration/propertyLocation'
-import {login_func} from '../../../../functions/landlord/login/login'
-
-
-
-  describe('Enter where would you like to live via address,enter prefered property, enter personal details and complete signup', function() {
+import {stg_login_ui_func} from '../../../../functions/landlord/login/login'
+  describe('Enter email addres and get redirected to the sso login page', function() {
+    Cypress.config({   "chromeWebSecurity": false})
     before(function () {
-        cy.window().then((win) => {
-          win.sessionStorage.clear()
-        })
         cy.visit(Cypress.env('ll_url')+'/de/login')
-      })
-  
-    login_func()
+    })
+    stg_login_ui_func()
    
   })
+
+
+  
+
+
 
 
   /*

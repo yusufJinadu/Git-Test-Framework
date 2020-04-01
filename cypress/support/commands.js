@@ -52,6 +52,18 @@ Cypress.Commands.add("checkInputLabelAndPlaceholder",(($input,$label,placeholder
     $label().invoke('text').should('include', labelText)
 }))
 
+Cypress.Commands.add("checkInputAndLabel",(($input,$label,labelText) => {
+    /**
+     * checks if an input field has the correct label text a
+     * $input = function to grt the input e.g page.getinput
+     * $label = function to get label = page.getLabel
+     * labelText = label text e.g 'street'
+     */
+    $input().should('exist')
+    $label().should('exist')
+    $label().invoke('text').should('include', labelText)
+}))
+
 Cypress.Commands.add("checkRequiredInput",(($input,$label,requiredAttr,requiredText) => {
       /**
      * checks if a required input has the required sign in its label and if it has the required attribute
