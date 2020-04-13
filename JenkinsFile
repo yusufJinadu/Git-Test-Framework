@@ -6,9 +6,7 @@ pipeline {
     environment {
         CHROME_BIN = '/bin/google-chrome'
     }
-
-
-
+    
     stages {
           stages {
         stage('Dependencies') {
