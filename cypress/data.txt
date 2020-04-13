@@ -6,3 +6,4 @@ FTP-Server: ftp.ebay-kleinanzeigen.de
 FTP-Username: immomio
 FTP-Passwort: koyzibcqezqo
 Anbieter-ID/ Nr.: immomiogit
+anythinf
