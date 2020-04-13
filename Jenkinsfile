@@ -7,8 +7,7 @@ pipeline {
         CHROME_BIN = '/bin/google-chrome'
     }
     
-    stages {
-          stages {
+    stages 
         stage('Dependencies') {
             steps {
                 sh 'npm i'
@@ -21,5 +20,4 @@ pipeline {
             }
         }
     }
-}
 }
